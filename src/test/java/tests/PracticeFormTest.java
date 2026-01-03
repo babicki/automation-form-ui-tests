@@ -3,9 +3,12 @@ package tests;
 import base.BaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebElement;
 import pages.PracticeFormPage;
 
-    public class PracticeFormTest extends BaseTest {
+import java.util.List;
+
+public class PracticeFormTest extends BaseTest {
 
         @Test
         void testFirstAndLastNameInput() {
@@ -44,4 +47,20 @@ import pages.PracticeFormPage;
                     formPage.getEmailValue()
             );
         }
+
+    @Test
+    void testGenderRadioButtonSelection() {
+
+        PracticeFormPage formPage = new PracticeFormPage(driver);
+        formPage.open();
+
+        List<WebElement> genderRadioLabels = formPage.getGenderRadioLabels();
+        List<WebElement> genderRadioInputs = formPage.getGenderRadioInputs();
+
+        for (int i = 0; i < genderRadioLabels.size(); i++) {
+            genderRadioLabels.get(i).click();
+            sleepFor(2000);
+            Assertions.assertTrue(genderRadioInputs.get(i).isSelected());
+        }
+    }
 }
