@@ -2,6 +2,9 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class PracticeFormPage {
 
@@ -13,6 +16,10 @@ public class PracticeFormPage {
 
     // Email
     private By emailInput = By.id("userEmail");
+
+    // Gender
+    private By genderRadioLabels = By.cssSelector("label[for^='gender-radio']");
+    private By genderRadioInputs = By.cssSelector("input[name='gender']");
 
     // Constructor
     public PracticeFormPage(WebDriver driver) {
@@ -33,6 +40,14 @@ public class PracticeFormPage {
 
     public void enterEmail(String email) {
         driver.findElement(emailInput).sendKeys(email);
+    }
+
+    public List<WebElement> getGenderRadioLabels() {
+        return driver.findElements(genderRadioLabels);
+    }
+
+    public List<WebElement> getGenderRadioInputs() {
+        return driver.findElements(genderRadioInputs);
     }
 
     // Getters
