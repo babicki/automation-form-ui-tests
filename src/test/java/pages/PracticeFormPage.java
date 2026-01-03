@@ -11,6 +11,9 @@ public class PracticeFormPage {
     private By firstNameInput = By.id("firstName");
     private By lastNameInput = By.id("lastName");
 
+    // Email
+    private By emailInput = By.id("userEmail");
+
     // Constructor
     public PracticeFormPage(WebDriver driver) {
         this.driver = driver;
@@ -28,6 +31,10 @@ public class PracticeFormPage {
         driver.findElement(lastNameInput).sendKeys(lastName);
     }
 
+    public void enterEmail(String email) {
+        driver.findElement(emailInput).sendKeys(email);
+    }
+
     // Getters
     public String getFirstNameValue() {
         return driver.findElement(firstNameInput).getAttribute("value");
@@ -35,5 +42,9 @@ public class PracticeFormPage {
 
     public String getLastNameValue() {
         return driver.findElement(lastNameInput).getAttribute("value");
+    }
+
+    public String getEmailValue() {
+        return driver.findElement(emailInput).getAttribute("value");
     }
 }

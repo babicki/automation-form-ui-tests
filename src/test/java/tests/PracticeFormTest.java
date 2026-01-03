@@ -29,4 +29,19 @@ import pages.PracticeFormPage;
                     formPage.getLastNameValue()
             );
         }
+
+        @Test
+        void testEmailInput() {
+
+            PracticeFormPage formPage = new PracticeFormPage(driver);
+            formPage.open();
+
+            formPage.enterEmail("test@example.com");
+            sleepFor(2000);
+
+            Assertions.assertEquals(
+                    "test@example.com",
+                    formPage.getEmailValue()
+            );
+        }
 }
