@@ -16,6 +16,18 @@ public class PracticeFormPage {
         this.driver = driver;
     }
 
+    public void open() {
+        driver.get("https://demoqa.com/automation-practice-form");
+    }
+
+    public void enterFirstName(String firstName) {
+        driver.findElement(firstNameInput).sendKeys(firstName);
+    }
+
+    public void enterLastName(String lastName) {
+        driver.findElement(lastNameInput).sendKeys(lastName);
+    }
+
     // Getters
     public String getFirstNameValue() {
         return driver.findElement(firstNameInput).getAttribute("value");
