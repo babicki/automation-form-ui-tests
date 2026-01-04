@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 import pages.PracticeFormPage;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 public class PracticeFormTest extends BaseTest {
@@ -158,5 +159,26 @@ public class PracticeFormTest extends BaseTest {
         formPage.selectMusicHobby();
         sleepFor(1000);
         Assertions.assertTrue(formPage.isMusicSelected());
+    }
+
+    @Test
+    void testUploadPicture() {
+
+        PracticeFormPage formPage = new PracticeFormPage(driver);
+        formPage.open();
+
+        formPage.scrollToBottom();
+        sleepFor(1000);
+
+        String pathToImage = Paths.get(
+                "src", "test", "resources", "square.png"
+        ).toAbsolutePath().toString();
+
+        formPage.uploadPicture(pathToImage);
+        sleepFor(2000);
+
+        Assertions.assertTrue(
+                formPage.getUploadedPictureValue().contains("square.png")
+        );
     }
 }
