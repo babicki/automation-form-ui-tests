@@ -49,6 +49,13 @@ public class PracticeFormPage {
     // Current address
     private By currentAddressInput = By.id("currentAddress");
 
+    // State & city
+    private By stateInput = By.id("react-select-3-input");
+    private By cityInput = By.id("react-select-4-input");
+
+    private By selectedStateValue = By.xpath("//div[@id='state']//div[contains(@class,'singleValue')]");
+    private By selectedCityValue = By.xpath("//div[@id='city']//div[contains(@class,'singleValue')]");
+
     // Constructor
     public PracticeFormPage(WebDriver driver) {
         this.driver = driver;
@@ -146,6 +153,19 @@ public class PracticeFormPage {
         driver.findElement(currentAddressInput).sendKeys(address);
     }
 
+    public void enterState(String stateName) {
+        WebElement state = driver.findElement(stateInput);
+        state.sendKeys(stateName);
+        state.sendKeys(Keys.ENTER);
+    }
+
+    public void enterCity(String cityName) {
+        WebElement city = driver.findElement(cityInput);
+        city.clear();
+        city.sendKeys(cityName);
+        city.sendKeys(Keys.ENTER);
+    }
+
     public void scrollToBottom() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
@@ -178,5 +198,13 @@ public class PracticeFormPage {
 
     public String getCurrentAddressValue() {
         return driver.findElement(currentAddressInput).getAttribute("value");
+    }
+
+    public String getSelectedState() {
+        return driver.findElement(selectedStateValue).getText();
+    }
+
+    public String getSelectedCity() {
+        return driver.findElement(selectedCityValue).getText();
     }
 }
