@@ -46,6 +46,9 @@ public class PracticeFormPage {
     // Picture
     private By uploadPictureInput = By.id("uploadPicture");
 
+    // Current address
+    private By currentAddressInput = By.id("currentAddress");
+
     // Constructor
     public PracticeFormPage(WebDriver driver) {
         this.driver = driver;
@@ -139,6 +142,10 @@ public class PracticeFormPage {
         driver.findElement(uploadPictureInput).sendKeys(filePath);
     }
 
+    public void enterCurrentAddress(String address) {
+        driver.findElement(currentAddressInput).sendKeys(address);
+    }
+
     public void scrollToBottom() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
@@ -167,5 +174,9 @@ public class PracticeFormPage {
 
     public String getUploadedPictureValue() {
         return driver.findElement(uploadPictureInput).getAttribute("value");
+    }
+
+    public String getCurrentAddressValue() {
+        return driver.findElement(currentAddressInput).getAttribute("value");
     }
 }
