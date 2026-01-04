@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -36,6 +33,15 @@ public class PracticeFormPage {
 
     // Subjects
     private By subjectsInput = By.id("subjectsInput");
+
+    // Hobbies
+    private By sportsLabel = By.cssSelector("label[for='hobbies-checkbox-1']");
+    private By readingLabel = By.cssSelector("label[for='hobbies-checkbox-2']");
+    private By musicLabel = By.cssSelector("label[for='hobbies-checkbox-3']");
+
+    private By sportsCheckbox = By.id("hobbies-checkbox-1");
+    private By readingCheckbox = By.id("hobbies-checkbox-2");
+    private By musicCheckbox = By.id("hobbies-checkbox-3");
 
     // Constructor
     public PracticeFormPage(WebDriver driver) {
@@ -100,6 +106,35 @@ public class PracticeFormPage {
         return driver.findElement(
                 By.xpath("//div[contains(@class,'subjects-auto-complete__multi-value__label') and text()='" + subject + "']")
         ).isDisplayed();
+    }
+
+    public void selectSportsHobby() {
+        driver.findElement(sportsLabel).click();
+    }
+
+    public void selectReadingHobby() {
+        driver.findElement(readingLabel).click();
+    }
+
+    public void selectMusicHobby() {
+        driver.findElement(musicLabel).click();
+    }
+
+    public boolean isSportsSelected() {
+        return driver.findElement(sportsCheckbox).isSelected();
+    }
+
+    public boolean isReadingSelected() {
+        return driver.findElement(readingCheckbox).isSelected();
+    }
+
+    public boolean isMusicSelected() {
+        return driver.findElement(musicCheckbox).isSelected();
+    }
+
+    public void scrollToBottom() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
     }
 
     // Getters

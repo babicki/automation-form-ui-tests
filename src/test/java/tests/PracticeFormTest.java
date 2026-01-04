@@ -137,4 +137,26 @@ public class PracticeFormTest extends BaseTest {
             );
         }
     }
+
+    @Test
+    void testHobbiesCheckboxSelection() {
+
+        PracticeFormPage formPage = new PracticeFormPage(driver);
+        formPage.open();
+
+        formPage.scrollToBottom();
+        sleepFor(1000);
+
+        formPage.selectSportsHobby();
+        sleepFor(1000);
+        Assertions.assertTrue(formPage.isSportsSelected());
+
+        formPage.selectReadingHobby();
+        sleepFor(1000);
+        Assertions.assertTrue(formPage.isReadingSelected());
+
+        formPage.selectMusicHobby();
+        sleepFor(1000);
+        Assertions.assertTrue(formPage.isMusicSelected());
+    }
 }
