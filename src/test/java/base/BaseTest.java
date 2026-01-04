@@ -40,12 +40,4 @@ public abstract class BaseTest {
     static void tearDown() {
         driver.quit();
     }
-
-    protected void sleepFor(long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-    }
 }

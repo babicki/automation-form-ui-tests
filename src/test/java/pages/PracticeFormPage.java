@@ -56,8 +56,8 @@ public class PracticeFormPage {
     private final By stateInput = By.id("react-select-3-input");
     private final By cityInput = By.id("react-select-4-input");
 
-    private final By selectedStateValue = By.xpath("//div[@id='state']//div[contains(@class,'singleValue')]");
-    private final By selectedCityValue = By.xpath("//div[@id='city']//div[contains(@class,'singleValue')]");
+    private final By selectedStateInput = By.xpath("//div[@id='state']//div[contains(@class,'singleValue')]");
+    private final By selectedCityInput = By.xpath("//div[@id='city']//div[contains(@class,'singleValue')]");
 
     // Submit
     private final By submitButton = By.id("submit");
@@ -211,12 +211,12 @@ public class PracticeFormPage {
         return driver.findElement(currentAddressInput).getAttribute("value");
     }
 
-    public String getSelectedState() {
-        return driver.findElement(selectedStateValue).getText();
+    public String getSelectedStateValue() {
+        return driver.findElement(selectedStateInput).getText();
     }
 
-    public String getSelectedCity() {
-        return driver.findElement(selectedCityValue).getText();
+    public String getSelectedCityValue() {
+        return driver.findElement(selectedCityInput).getText();
     }
 
     public void selectFirstGender() {
