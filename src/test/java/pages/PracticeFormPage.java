@@ -1,7 +1,9 @@
 package pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -55,6 +57,10 @@ public class PracticeFormPage {
 
     private By selectedStateValue = By.xpath("//div[@id='state']//div[contains(@class,'singleValue')]");
     private By selectedCityValue = By.xpath("//div[@id='city']//div[contains(@class,'singleValue')]");
+
+    // Submit
+    private By submitButton = By.id("submit");
+    private By modalTitle = By.id("example-modal-sizes-title-lg");
 
     // Constructor
     public PracticeFormPage(WebDriver driver) {
@@ -166,6 +172,10 @@ public class PracticeFormPage {
         city.sendKeys(Keys.ENTER);
     }
 
+    public void submitForm(WebDriverWait wait) {
+        wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
+    }
+
     public void scrollToBottom() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
@@ -206,5 +216,15 @@ public class PracticeFormPage {
 
     public String getSelectedCity() {
         return driver.findElement(selectedCityValue).getText();
+    }
+
+    public void selectFirstGender() {
+        driver.findElement(genderRadioLabels).click();
+    }
+
+    public String getModalTitle(WebDriverWait wait) {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(modalTitle)
+        ).getText();
     }
 }

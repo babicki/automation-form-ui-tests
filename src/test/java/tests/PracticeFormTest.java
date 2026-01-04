@@ -4,9 +4,11 @@ import base.BaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.PracticeFormPage;
 
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -247,5 +249,93 @@ public class PracticeFormTest extends BaseTest {
                 );
             }
         }
+    }
+
+    @Test
+    void testFullFormSubmit() {
+
+        PracticeFormPage formPage = new PracticeFormPage(driver);
+        formPage.open();
+        sleepFor(1000);
+
+        // First name & last name
+        formPage.enterFirstName("John");
+        sleepFor(1000);
+
+        formPage.enterLastName("Smith");
+        sleepFor(1000);
+
+        // Email
+        formPage.enterEmail("test@example.com");
+        sleepFor(1000);
+
+        // Gender
+        formPage.selectFirstGender();
+        sleepFor(1000);
+
+        // Mobile
+        formPage.enterMobile("1234567890");
+        sleepFor(1000);
+
+        // Date of birth
+        formPage.openDatePicker();
+        sleepFor(1000);
+
+        formPage.selectMonth("January");
+        sleepFor(1000);
+
+        formPage.selectYear("1963");
+        sleepFor(1000);
+
+        formPage.selectDay("27");
+        sleepFor(1000);
+
+        // Subjects
+        formPage.addSubject("Maths");
+        sleepFor(1000);
+
+        // Scroll
+        formPage.scrollToBottom();
+        sleepFor(1000);
+
+        // Hobbies
+        formPage.selectSportsHobby();
+        sleepFor(1000);
+
+        formPage.selectReadingHobby();
+        sleepFor(1000);
+
+        // Picture
+        formPage.uploadPicture(
+                Paths.get("src/test/resources/square.png")
+                        .toAbsolutePath()
+                        .toString()
+        );
+        sleepFor(1000);
+
+        // Current address
+        formPage.enterCurrentAddress(
+                "742 Longhorn Avenue\n" +
+                        "Austin, TX 78701\n" +
+                        "USA");
+        sleepFor(1000);
+
+        // State & city
+        formPage.enterState("NCR");
+        sleepFor(1000);
+
+        formPage.enterCity("Delhi");
+        sleepFor(1000);
+
+        // Submit
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        formPage.submitForm(wait);
+
+        Assertions.assertEquals(
+                "Thanks for submitting the form",
+                formPage.getModalTitle(wait)
+        );
+
+        sleepFor(5000);
     }
 }
