@@ -43,6 +43,9 @@ public class PracticeFormPage {
     private By readingCheckbox = By.id("hobbies-checkbox-2");
     private By musicCheckbox = By.id("hobbies-checkbox-3");
 
+    // Picture
+    private By uploadPictureInput = By.id("uploadPicture");
+
     // Constructor
     public PracticeFormPage(WebDriver driver) {
         this.driver = driver;
@@ -132,6 +135,10 @@ public class PracticeFormPage {
         return driver.findElement(musicCheckbox).isSelected();
     }
 
+    public void uploadPicture(String filePath) {
+        driver.findElement(uploadPictureInput).sendKeys(filePath);
+    }
+
     public void scrollToBottom() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
@@ -156,5 +163,9 @@ public class PracticeFormPage {
 
     public String getSelectedDateOfBirth() {
         return driver.findElement(dateOfBirthInput).getAttribute("value");
+    }
+
+    public String getUploadedPictureValue() {
+        return driver.findElement(uploadPictureInput).getAttribute("value");
     }
 }
