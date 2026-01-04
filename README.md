@@ -24,7 +24,7 @@ Tests are executed in **Google Chrome** with the following settings:
 - Chrome driver is managed automatically by WebDriverManager – no manual download required
 
 ## Project Structure
-
+```
 src
 └── test
 ├── java
@@ -36,7 +36,7 @@ src
 │ └── PracticeFormTest.java
 └── resources
 └── square.png
-
+```
 ## Test Coverage
 
 The project contains tests for the following functionalities:
