@@ -181,4 +181,28 @@ public class PracticeFormTest extends BaseTest {
                 formPage.getUploadedPictureValue().contains("square.png")
         );
     }
+
+    @Test
+    void testCurrentAddressInput() {
+
+        PracticeFormPage formPage = new PracticeFormPage(driver);
+        formPage.open();
+
+        formPage.scrollToBottom();
+        sleepFor(1000);
+
+        String address =
+                "New Beverly Cinema\n" +
+                        "7165 Beverly Blvd\n" +
+                        "Los Angeles, CA 90036\n" +
+                        "USA";
+
+        formPage.enterCurrentAddress(address);
+        sleepFor(2000);
+
+        Assertions.assertEquals(
+                address,
+                formPage.getCurrentAddressValue()
+        );
+    }
 }
