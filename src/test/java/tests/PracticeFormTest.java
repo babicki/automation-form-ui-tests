@@ -102,4 +102,39 @@ public class PracticeFormTest extends BaseTest {
                 formPage.getSelectedDateOfBirth()
         );
     }
+
+    @Test
+    void testSubjectsInput() {
+
+        PracticeFormPage formPage = new PracticeFormPage(driver);
+        formPage.open();
+
+        String[] subjects = {
+                "Maths",
+                "Accounting",
+                "Arts",
+                "Social Studies",
+                "Biology",
+                "Chemistry",
+                "Computer Science",
+                "Commerce",
+                "Economics",
+                "Civics",
+                "Hindi",
+                "English",
+                "History",
+                "Physics"
+        };
+
+        for (String subject : subjects) {
+
+            formPage.addSubject(subject);
+            sleepFor(500);
+
+            Assertions.assertTrue(
+                    formPage.isSubjectAdded(subject),
+                    "Subject was not added: " + subject
+            );
+        }
+    }
 }
