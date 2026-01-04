@@ -113,10 +113,11 @@ public class PracticeFormTest extends BaseTest {
     void testCurrentAddressInput() {
         formPage.scrollToBottom();
 
-        String address = "New Beverly Cinema\n" +
-                "7165 Beverly Blvd\n" +
-                "Los Angeles, CA 90036\n" +
-                "USA";
+        String address = """
+                New Beverly Cinema
+                7165 Beverly Blvd
+                Los Angeles, CA 90036
+                USA""";
 
         formPage.enterCurrentAddress(address);
         Assertions.assertEquals(address, formPage.getCurrentAddressValue());
