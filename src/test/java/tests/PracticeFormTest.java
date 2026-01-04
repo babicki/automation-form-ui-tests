@@ -7,7 +7,9 @@ import org.openqa.selenium.WebElement;
 import pages.PracticeFormPage;
 
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PracticeFormTest extends BaseTest {
 
@@ -204,5 +206,46 @@ public class PracticeFormTest extends BaseTest {
                 address,
                 formPage.getCurrentAddressValue()
         );
+    }
+
+    @Test
+    void testStateAndCityDropdownSelection() {
+
+        PracticeFormPage formPage = new PracticeFormPage(driver);
+        formPage.open();
+
+        formPage.scrollToBottom();
+        sleepFor(1000);
+
+        Map<String, List<String>> stateCityMap = new HashMap<>();
+        stateCityMap.put("NCR", List.of("Delhi", "Gurgaon", "Noida"));
+        stateCityMap.put("Uttar Pradesh", List.of("Agra", "Lucknow", "Merrut"));
+        stateCityMap.put("Haryana", List.of("Karnal", "Panipat"));
+        stateCityMap.put("Rajasthan", List.of("Jaipur", "Jaiselmer"));
+
+        for (Map.Entry<String, List<String>> entry : stateCityMap.entrySet()) {
+
+            String stateName = entry.getKey();
+            List<String> cityList = entry.getValue();
+
+            formPage.enterState(stateName);
+            sleepFor(2000);
+
+            for (String cityName : cityList) {
+
+                formPage.enterCity(cityName);
+                sleepFor(2000);
+
+                Assertions.assertEquals(
+                        stateName,
+                        formPage.getSelectedState()
+                );
+
+                Assertions.assertEquals(
+                        cityName,
+                        formPage.getSelectedCity()
+                );
+            }
+        }
     }
 }
