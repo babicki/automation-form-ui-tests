@@ -12,55 +12,56 @@ public class PracticeFormPage {
     private WebDriver driver;
 
     // First name & last name
-    private By firstNameInput = By.id("firstName");
-    private By lastNameInput = By.id("lastName");
+    private final By firstNameInput = By.id("firstName");
+    private final By lastNameInput = By.id("lastName");
 
     // Email
-    private By emailInput = By.id("userEmail");
+    private final By emailInput = By.id("userEmail");
 
     // Gender
-    private By genderRadioLabels = By.cssSelector("label[for^='gender-radio']");
-    private By genderRadioInputs = By.cssSelector("input[name='gender']");
+    private final By genderRadioLabels = By.cssSelector("label[for^='gender-radio']");
+    private final By genderRadioInputs = By.cssSelector("input[name='gender']");
 
     // Mobile
-    private By mobileInput = By.id("userNumber");
+    private final By mobileInput = By.id("userNumber");
 
     // Date of birth
-    private By dateOfBirthInput = By.id("dateOfBirthInput");
-    private By monthSelect = By.className("react-datepicker__month-select");
-    private By yearSelect = By.className("react-datepicker__year-select");
+    private final By dateOfBirthInput = By.id("dateOfBirthInput");
+    private final By monthSelect = By.className("react-datepicker__month-select");
+    private final By yearSelect = By.className("react-datepicker__year-select");
+
     private By day(String day) {
         return By.xpath("//div[contains(@class,'react-datepicker__day') and text()='" + day + "']");
     }
 
     // Subjects
-    private By subjectsInput = By.id("subjectsInput");
+    private final By subjectsInput = By.id("subjectsInput");
 
     // Hobbies
-    private By sportsLabel = By.cssSelector("label[for='hobbies-checkbox-1']");
-    private By readingLabel = By.cssSelector("label[for='hobbies-checkbox-2']");
-    private By musicLabel = By.cssSelector("label[for='hobbies-checkbox-3']");
+    private final By sportsLabel = By.cssSelector("label[for='hobbies-checkbox-1']");
+    private final By readingLabel = By.cssSelector("label[for='hobbies-checkbox-2']");
+    private final By musicLabel = By.cssSelector("label[for='hobbies-checkbox-3']");
 
-    private By sportsCheckbox = By.id("hobbies-checkbox-1");
-    private By readingCheckbox = By.id("hobbies-checkbox-2");
-    private By musicCheckbox = By.id("hobbies-checkbox-3");
+    private final By sportsCheckbox = By.id("hobbies-checkbox-1");
+    private final By readingCheckbox = By.id("hobbies-checkbox-2");
+    private final By musicCheckbox = By.id("hobbies-checkbox-3");
 
     // Picture
-    private By uploadPictureInput = By.id("uploadPicture");
+    private final By uploadPictureInput = By.id("uploadPicture");
 
     // Current address
-    private By currentAddressInput = By.id("currentAddress");
+    private final By currentAddressInput = By.id("currentAddress");
 
     // State & city
-    private By stateInput = By.id("react-select-3-input");
-    private By cityInput = By.id("react-select-4-input");
+    private final By stateInput = By.id("react-select-3-input");
+    private final By cityInput = By.id("react-select-4-input");
 
-    private By selectedStateValue = By.xpath("//div[@id='state']//div[contains(@class,'singleValue')]");
-    private By selectedCityValue = By.xpath("//div[@id='city']//div[contains(@class,'singleValue')]");
+    private final By selectedStateValue = By.xpath("//div[@id='state']//div[contains(@class,'singleValue')]");
+    private final By selectedCityValue = By.xpath("//div[@id='city']//div[contains(@class,'singleValue')]");
 
     // Submit
-    private By submitButton = By.id("submit");
-    private By modalTitle = By.id("example-modal-sizes-title-lg");
+    private final By submitButton = By.id("submit");
+    private final By modalTitle = By.id("example-modal-sizes-title-lg");
 
     // Constructor
     public PracticeFormPage(WebDriver driver) {
