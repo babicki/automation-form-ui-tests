@@ -78,4 +78,28 @@ public class PracticeFormTest extends BaseTest {
                 formPage.getMobileValue()
         );
     }
+
+    @Test
+    void testDateOfBirth() {
+
+        PracticeFormPage formPage = new PracticeFormPage(driver);
+        formPage.open();
+
+        formPage.openDatePicker();
+        sleepFor(2000);
+
+        formPage.selectMonth("May");
+        sleepFor(2000);
+
+        formPage.selectYear("1995");
+        sleepFor(2000);
+
+        formPage.selectDay("19");
+        sleepFor(2000);
+
+        Assertions.assertEquals(
+                "19 May 1995",
+                formPage.getSelectedDateOfBirth()
+        );
+    }
 }

@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -23,6 +24,14 @@ public class PracticeFormPage {
 
     // Mobile
     private By mobileInput = By.id("userNumber");
+
+    // Date of birth
+    private By dateOfBirthInput = By.id("dateOfBirthInput");
+    private By monthSelect = By.className("react-datepicker__month-select");
+    private By yearSelect = By.className("react-datepicker__year-select");
+    private By day(String day) {
+        return By.xpath("//div[contains(@class,'react-datepicker__day') and text()='" + day + "']");
+    }
 
     // Constructor
     public PracticeFormPage(WebDriver driver) {
@@ -57,6 +66,24 @@ public class PracticeFormPage {
         driver.findElement(mobileInput).sendKeys(mobile);
     }
 
+    public void openDatePicker() {
+        driver.findElement(dateOfBirthInput).click();
+    }
+
+    public void selectMonth(String month) {
+        Select selectMonth = new Select(driver.findElement(monthSelect));
+        selectMonth.selectByVisibleText(month);
+    }
+
+    public void selectDay(String day) {
+        driver.findElement(day(day)).click();
+    }
+
+    public void selectYear(String year) {
+        Select selectYear = new Select(driver.findElement(yearSelect));
+        selectYear.selectByVisibleText(year);
+    }
+
     // Getters
     public String getFirstNameValue() {
         return driver.findElement(firstNameInput).getAttribute("value");
@@ -72,5 +99,9 @@ public class PracticeFormPage {
 
     public String getMobileValue() {
         return driver.findElement(mobileInput).getAttribute("value");
+    }
+
+    public String getSelectedDateOfBirth() {
+        return driver.findElement(dateOfBirthInput).getAttribute("value");
     }
 }
