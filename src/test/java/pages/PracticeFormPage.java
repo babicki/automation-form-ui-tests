@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -32,6 +33,9 @@ public class PracticeFormPage {
     private By day(String day) {
         return By.xpath("//div[contains(@class,'react-datepicker__day') and text()='" + day + "']");
     }
+
+    // Subjects
+    private By subjectsInput = By.id("subjectsInput");
 
     // Constructor
     public PracticeFormPage(WebDriver driver) {
@@ -82,6 +86,20 @@ public class PracticeFormPage {
     public void selectYear(String year) {
         Select selectYear = new Select(driver.findElement(yearSelect));
         selectYear.selectByVisibleText(year);
+    }
+
+    public void addSubject(String subject) {
+        WebElement input = driver.findElement(subjectsInput);
+
+        input.sendKeys(String.valueOf(subject.charAt(0)));
+        input.sendKeys(subject.substring(1));
+        input.sendKeys(Keys.ENTER);
+    }
+
+    public boolean isSubjectAdded(String subject) {
+        return driver.findElement(
+                By.xpath("//div[contains(@class,'subjects-auto-complete__multi-value__label') and text()='" + subject + "']")
+        ).isDisplayed();
     }
 
     // Getters
