@@ -3,18 +3,21 @@ package base;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import pages.PracticeFormPage;
 
 import java.time.Duration;
 
-public class BaseTest {
+public abstract class BaseTest {
 
     protected static WebDriver driver;
+    protected PracticeFormPage formPage;
 
     @BeforeAll
-    static void setUp() {
+    static void setUpDriver() {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -27,16 +30,22 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
-    protected static void sleepFor(long ms){
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+    @BeforeEach
+    void openPracticeForm() {
+        formPage = new PracticeFormPage(driver);
+        formPage.open();
     }
 
     @AfterAll
     static void tearDown() {
         driver.quit();
+    }
+
+    protected void sleepFor(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 }

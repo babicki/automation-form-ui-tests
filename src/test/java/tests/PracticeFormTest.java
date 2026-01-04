@@ -18,9 +18,6 @@ public class PracticeFormTest extends BaseTest {
         @Test
         void testFirstAndLastNameInput() {
 
-            PracticeFormPage formPage = new PracticeFormPage(driver);
-            formPage.open();
-
             formPage.enterFirstName("Quentin");
             sleepFor(2000);
 
@@ -41,9 +38,6 @@ public class PracticeFormTest extends BaseTest {
         @Test
         void testEmailInput() {
 
-            PracticeFormPage formPage = new PracticeFormPage(driver);
-            formPage.open();
-
             formPage.enterEmail("test@example.com");
             sleepFor(2000);
 
@@ -55,9 +49,6 @@ public class PracticeFormTest extends BaseTest {
 
     @Test
     void testGenderRadioButtonSelection() {
-
-        PracticeFormPage formPage = new PracticeFormPage(driver);
-        formPage.open();
 
         List<WebElement> genderRadioLabels = formPage.getGenderRadioLabels();
         List<WebElement> genderRadioInputs = formPage.getGenderRadioInputs();
@@ -71,9 +62,6 @@ public class PracticeFormTest extends BaseTest {
 
     @Test
     void testMobileInput() {
-
-        PracticeFormPage formPage = new PracticeFormPage(driver);
-        formPage.open();
 
         formPage.enterMobile("1234567890");
         sleepFor(2000);
@@ -111,9 +99,6 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void testSubjectsInput() {
 
-        PracticeFormPage formPage = new PracticeFormPage(driver);
-        formPage.open();
-
         String[] subjects = {
                 "Maths",
                 "Accounting",
@@ -146,9 +131,6 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void testHobbiesCheckboxSelection() {
 
-        PracticeFormPage formPage = new PracticeFormPage(driver);
-        formPage.open();
-
         formPage.scrollToBottom();
         sleepFor(1000);
 
@@ -168,9 +150,6 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void testUploadPicture() {
 
-        PracticeFormPage formPage = new PracticeFormPage(driver);
-        formPage.open();
-
         formPage.scrollToBottom();
         sleepFor(1000);
 
@@ -188,9 +167,6 @@ public class PracticeFormTest extends BaseTest {
 
     @Test
     void testCurrentAddressInput() {
-
-        PracticeFormPage formPage = new PracticeFormPage(driver);
-        formPage.open();
 
         formPage.scrollToBottom();
         sleepFor(1000);
@@ -212,9 +188,6 @@ public class PracticeFormTest extends BaseTest {
 
     @Test
     void testStateAndCityDropdownSelection() {
-
-        PracticeFormPage formPage = new PracticeFormPage(driver);
-        formPage.open();
 
         formPage.scrollToBottom();
         sleepFor(1000);
@@ -254,8 +227,6 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void testFullFormSubmit() {
 
-        PracticeFormPage formPage = new PracticeFormPage(driver);
-        formPage.open();
         sleepFor(1000);
 
         // First name & last name
