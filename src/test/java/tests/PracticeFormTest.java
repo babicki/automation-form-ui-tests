@@ -63,4 +63,19 @@ public class PracticeFormTest extends BaseTest {
             Assertions.assertTrue(genderRadioInputs.get(i).isSelected());
         }
     }
+
+    @Test
+    void testMobileInput() {
+
+        PracticeFormPage formPage = new PracticeFormPage(driver);
+        formPage.open();
+
+        formPage.enterMobile("1234567890");
+        sleepFor(2000);
+
+        Assertions.assertEquals(
+                "1234567890",
+                formPage.getMobileValue()
+        );
+    }
 }

@@ -21,6 +21,9 @@ public class PracticeFormPage {
     private By genderRadioLabels = By.cssSelector("label[for^='gender-radio']");
     private By genderRadioInputs = By.cssSelector("input[name='gender']");
 
+    // Mobile
+    private By mobileInput = By.id("userNumber");
+
     // Constructor
     public PracticeFormPage(WebDriver driver) {
         this.driver = driver;
@@ -50,6 +53,10 @@ public class PracticeFormPage {
         return driver.findElements(genderRadioInputs);
     }
 
+    public void enterMobile(String mobile) {
+        driver.findElement(mobileInput).sendKeys(mobile);
+    }
+
     // Getters
     public String getFirstNameValue() {
         return driver.findElement(firstNameInput).getAttribute("value");
@@ -61,5 +68,9 @@ public class PracticeFormPage {
 
     public String getEmailValue() {
         return driver.findElement(emailInput).getAttribute("value");
+    }
+
+    public String getMobileValue() {
+        return driver.findElement(mobileInput).getAttribute("value");
     }
 }
