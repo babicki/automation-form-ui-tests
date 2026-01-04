@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PracticeFormPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     // First name & last name
     private final By firstNameInput = By.id("firstName");
