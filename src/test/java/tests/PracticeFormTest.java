@@ -1,6 +1,9 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
@@ -13,9 +16,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Test class for the Practice Form page.
+ * Contains tests for various form functionalities.
+ */
+@Epic("Automation Practice Form")
+@Feature("Form Input and Validation")
 public class PracticeFormTest extends BaseTest {
 
     // ------------------------- FIRST NAME & LAST NAME TEST -------------------------
+    /**
+     * Tests entering first and last name.
+     */
+    @Story("First and Last Name Input")
     @Test
     void testFirstAndLastNameInput() {
         formPage.enterFirstName("Quentin");
@@ -26,6 +39,10 @@ public class PracticeFormTest extends BaseTest {
     }
 
     // ------------------------- EMAIL TEST -------------------------
+    /**
+     * Tests entering email.
+     */
+    @Story("Email Input")
     @Test
     void testEmailInput() {
         formPage.enterEmail("test@example.com");
@@ -33,6 +50,10 @@ public class PracticeFormTest extends BaseTest {
     }
 
     // ------------------------- GENDER RADIO BUTTON SELECTION TEST -------------------------
+    /**
+     * Tests gender radio button selection.
+     */
+    @Story("Gender Selection")
     @Test
     void testGenderRadioButtonSelection() {
         List<WebElement> genderRadioLabels = formPage.getGenderRadioLabels();
@@ -45,6 +66,10 @@ public class PracticeFormTest extends BaseTest {
     }
 
     // ------------------------- MOBILE PHONE TEST -------------------------
+    /**
+     * Tests entering mobile number.
+     */
+    @Story("Mobile Input")
     @Test
     void testMobileInput() {
         formPage.enterMobile("1234567890");
@@ -52,11 +77,12 @@ public class PracticeFormTest extends BaseTest {
     }
 
     // ------------------------- DATE OF BIRTH TEST -------------------------
+    /**
+     * Tests date of birth selection.
+     */
+    @Story("Date of Birth Selection")
     @Test
     void testDateOfBirth() {
-        PracticeFormPage formPage = new PracticeFormPage(driver);
-        formPage.open();
-
         formPage.openDatePicker();
         formPage.selectMonth("May");
         formPage.selectYear("1995");
@@ -66,6 +92,10 @@ public class PracticeFormTest extends BaseTest {
     }
 
     // ------------------------- SUBJECTS TEST -------------------------
+    /**
+     * Tests adding subjects.
+     */
+    @Story("Subjects Addition")
     @Test
     void testSubjectsInput() {
         String[] subjects = {
@@ -81,6 +111,10 @@ public class PracticeFormTest extends BaseTest {
     }
 
     // ------------------------- HOBBIES CHECKBOX SELECTION TEST -------------------------
+    /**
+     * Tests hobbies checkbox selection.
+     */
+    @Story("Hobbies Selection")
     @Test
     void testHobbiesCheckboxSelection() {
         formPage.scrollToBottom();
@@ -96,6 +130,10 @@ public class PracticeFormTest extends BaseTest {
     }
 
     // ------------------------- UPLOAD PICTURE TEST -------------------------
+    /**
+     * Tests picture upload.
+     */
+    @Story("Picture Upload")
     @Test
     void testUploadPicture() {
         formPage.scrollToBottom();
@@ -109,6 +147,10 @@ public class PracticeFormTest extends BaseTest {
     }
 
     // ------------------------- CURRENT ADDRESS TEST -------------------------
+    /**
+     * Tests entering current address.
+     */
+    @Story("Current Address Input")
     @Test
     void testCurrentAddressInput() {
         formPage.scrollToBottom();
@@ -124,6 +166,10 @@ public class PracticeFormTest extends BaseTest {
     }
 
     // ------------------------- STATE & CITY DROPDOWN SELECTION TEST -------------------------
+    /**
+     * Tests state and city dropdown selection.
+     */
+    @Story("State and City Selection")
     @Test
     void testStateAndCityDropdownSelection() {
         formPage.scrollToBottom();
@@ -149,6 +195,10 @@ public class PracticeFormTest extends BaseTest {
     }
 
     // ------------------------- FULL FORM SUBMIT TEST -------------------------
+    /**
+     * Tests full form submission.
+     */
+    @Story("Full Form Submission")
     @Test
     void testFullFormSubmit() {
         // First name & last name
@@ -197,3 +247,4 @@ public class PracticeFormTest extends BaseTest {
         Assertions.assertEquals("Thanks for submitting the form", formPage.getModalTitle(wait));
     }
 }
+
