@@ -87,3 +87,24 @@ Tests can be executed:
 - **From Maven**:
 ```bash
 mvn test
+```
+
+#### Running Allure Reports Locally:
+#### MacOS (via Homebrew):
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" # Install Homebrew
+brew install allure # Install Allure CLI
+```
+```bash
+mvn test && allure serve target/allure-results # Run tests and open Allure report
+```
+
+#### Windows (PowerShell, winget):
+```bash
+winget install --id=Qameta.Allure -e --source winget # Install Allure CLI
+```
+
+####
+```bash
+mvn test; allure serve target/allure-results # Run tests and open Allure report
+```
