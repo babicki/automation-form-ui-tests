@@ -1,6 +1,6 @@
 # Automation Practice Form Tests
 
-This project contains **automated tests** for the [Automation Practice Form](https://demoqa.com/automation-practice-form) website.
+This project contains **automated tests** for the [Automation Practice Form](https://demoqa.com/automation-practice-form) page.
 
 The tests are written in **Java** using **Maven**, **Selenium WebDriver**, and **JUnit 5**, following the **Page Object Model (POM)** design pattern.  
 The goal of the project is to verify the correctness of all form fields – from simple inputs to full form submission.
@@ -90,7 +90,7 @@ mvn test
 ```
 
 #### Running Allure Reports Locally:
-#### MacOS (via Homebrew):
+#### macOS (via Homebrew):
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" # Install Homebrew
 brew install allure # Install Allure CLI
