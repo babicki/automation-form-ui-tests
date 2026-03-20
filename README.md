@@ -5,13 +5,13 @@ This project contains **automated tests** for the [Automation Practice Form](htt
 The tests are written in **Java** using **Maven**, **Selenium WebDriver**, and **JUnit 5**, following the **Page Object Model (POM)** design pattern.  
 The goal of the project is to verify the correctness of all form fields – from simple inputs to full form submission.
 
-## Technologies & Tools
+## Tech Stack
 
-- **Java**
+- **Java** - programming language
 - **Maven** – dependency management and test execution
 - **JUnit 5** – testing framework
 - **Selenium WebDriver** – browser automation
-- **WebDriverManager** – automatic Chrome driver management
+- **WebDriverManager** – manages Chrome driver automatically
 - **Google Chrome** – browser used for testing
 
 ## Browser Configuration
@@ -21,7 +21,7 @@ Tests are executed in **Google Chrome** with the following settings:
 - Incognito mode
 - Full-screen window
 - Implicit wait: 5 seconds
-- Chrome driver is managed automatically by WebDriverManager – no manual download required
+- Chrome driver managed automatically by WebDriverManager (no manual setup required)
 
 ## Project Structure
 ```
@@ -89,8 +89,9 @@ Tests can be executed:
 mvn test
 ```
 
-#### Running Allure Reports Locally:
-#### macOS (via Homebrew):
+Running Allure reports locally:
+
+**macOS (via Homebrew):**
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" # Install Homebrew
 brew install allure # Install Allure CLI
@@ -99,12 +100,11 @@ brew install allure # Install Allure CLI
 mvn test && allure serve target/allure-results # Run tests and open Allure report
 ```
 
-#### Windows (PowerShell, winget):
+**Windows (PowerShell, winget):**
 ```bash
 winget install --id=Qameta.Allure -e --source winget # Install Allure CLI
 ```
 
-####
 ```bash
 mvn test; allure serve target/allure-results # Run tests and open Allure report
 ```
