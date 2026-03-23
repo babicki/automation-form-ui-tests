@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * Test class for the Practice Form page.
- * Contains tests for various form functionalities.
+ * Tests different form functionalities.
  */
 @Epic("Automation Practice Form")
 @Feature("Form Input and Validation")
@@ -25,7 +25,7 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- FIRST NAME & LAST NAME TEST -------------------------
     /**
-     * Tests entering first and last name.
+     * Enters first and last name and checks if they appear correctly.
      */
     @Story("First and Last Name Input")
     @Test
@@ -39,7 +39,7 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- EMAIL TEST -------------------------
     /**
-     * Tests entering email.
+     * Enters email and checks if it is displayed correctly.
      */
     @Story("Email Input")
     @Test
@@ -50,7 +50,7 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- GENDER RADIO BUTTON SELECTION TEST -------------------------
     /**
-     * Tests gender radio button selection.
+     * Selects each gender option and checks if selection works.
      */
     @Story("Gender Selection")
     @Test
@@ -66,7 +66,7 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- MOBILE PHONE TEST -------------------------
     /**
-     * Tests entering mobile number.
+     * Enters mobile number and checks if it appears correctly.
      */
     @Story("Mobile Input")
     @Test
@@ -77,7 +77,7 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- DATE OF BIRTH TEST -------------------------
     /**
-     * Tests date of birth selection.
+     * Selects date of birth and checks if it is displayed correctly.
      */
     @Story("Date of Birth Selection")
     @Test
@@ -92,7 +92,7 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- SUBJECTS TEST -------------------------
     /**
-     * Tests adding subjects.
+     * Adds subjects and checks if they are added correctly.
      */
     @Story("Subjects Addition")
     @Test
@@ -111,7 +111,7 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- HOBBIES CHECKBOX SELECTION TEST -------------------------
     /**
-     * Tests hobbies checkbox selection.
+     * Selects hobbies and checks if they are marked correctly.
      */
     @Story("Hobbies Selection")
     @Test
@@ -130,7 +130,7 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- UPLOAD PICTURE TEST -------------------------
     /**
-     * Tests picture upload.
+     * Uploads a picture and checks if it is added.
      */
     @Story("Picture Upload")
     @Test
@@ -147,7 +147,7 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- CURRENT ADDRESS TEST -------------------------
     /**
-     * Tests entering current address.
+     * Enters current address and checks if it is displayed correctly.
      */
     @Story("Current Address Input")
     @Test
@@ -166,7 +166,7 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- STATE & CITY DROPDOWN SELECTION TEST -------------------------
     /**
-     * Tests state and city dropdown selection.
+     * Selects state and city from dropdowns and checks selections.
      */
     @Story("State and City Selection")
     @Test
@@ -195,7 +195,8 @@ public class PracticeFormTest extends BaseTest {
 
     // ------------------------- FULL FORM SUBMIT TEST -------------------------
     /**
-     * Tests full form submission.
+     * Fills the whole form and submits it.
+     * Checks the confirmation message.
      */
     @Story("Full Form Submission")
     @Test

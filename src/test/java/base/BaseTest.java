@@ -12,8 +12,8 @@ import pages.PracticeFormPage;
 import java.time.Duration;
 
 /**
- * Base class for test setup and teardown.
- * Provides WebDriver initialization and common test page objects.
+ * Base class for tests.
+ * Sets up WebDriver and common page objects.
  */
 public abstract class BaseTest {
 
@@ -25,7 +25,7 @@ public abstract class BaseTest {
 
     /**
      * Sets up the WebDriver before all tests.
-     * Configures ChromeDriver with incognito and fullscreen options.
+     * Uses ChromeDriver with incognito and fullscreen mode.
      */
     @BeforeAll
     static void setUpDriver() {
@@ -42,8 +42,8 @@ public abstract class BaseTest {
     }
 
     /**
-     * Initializes the practice form page before each test.
-     * Opens the form URL.
+     * Opens the practice form before each test.
+     * Initializes the PracticeFormPage object.
      */
     @BeforeEach
     void openPracticeForm() {
@@ -52,8 +52,8 @@ public abstract class BaseTest {
     }
 
     /**
-     * Tears down the WebDriver after all tests.
-     * Quits the driver if initialized.
+     * Closes the WebDriver after all tests.
+     * Quits the driver if it is running.
      */
     @AfterAll
     static void tearDown() {

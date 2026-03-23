@@ -8,8 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 /**
- * Page Object class for the Automation Practice Form page.
- * Provides methods to interact with form elements and retrieve values.
+ * Page Object for the Automation Practice Form page.
+ * Used to interact with the form and get values.
  */
 public class PracticeFormPage {
 
@@ -67,10 +67,9 @@ public class PracticeFormPage {
     private final By submitButton = By.id("submit");
     private final By modalTitle = By.id("example-modal-sizes-title-lg");
 
-    // Constructor
+
     /**
      * Constructor for PracticeFormPage.
-     * @param driver WebDriver instance to use for interactions.
      */
     public PracticeFormPage(WebDriver driver) {
         this.driver = driver;
@@ -78,70 +77,62 @@ public class PracticeFormPage {
 
     /**
      * Opens the specified URL in the browser.
-     * @param url The URL to navigate to.
      */
     public void open(String url) {
         driver.get(url);
     }
 
     /**
-     * Enters the first name into the form.
-     * @param firstName The first name to enter.
+     * Fills the first name input.
      */
     public void enterFirstName(String firstName) {
         driver.findElement(firstNameInput).sendKeys(firstName);
     }
 
     /**
-     * Enters the last name into the form.
-     * @param lastName The last name to enter.
+     * Fills the last name input.
      */
     public void enterLastName(String lastName) {
         driver.findElement(lastNameInput).sendKeys(lastName);
     }
 
     /**
-     * Enters the email into the form.
-     * @param email The email to enter.
+     * Fills the email input.
      */
     public void enterEmail(String email) {
         driver.findElement(emailInput).sendKeys(email);
     }
 
     /**
-     * Returns the list of gender radio button labels.
-     * @return List of WebElement representing gender labels.
+     * Returns all gender labels.
      */
     public List<WebElement> getGenderRadioLabels() {
         return driver.findElements(genderRadioLabels);
     }
 
     /**
-     * Returns the list of gender radio button inputs.
-     * @return List of WebElement representing gender inputs.
+     * Returns all gender input elements.
      */
     public List<WebElement> getGenderRadioInputs() {
         return driver.findElements(genderRadioInputs);
     }
 
     /**
-     * Enters the mobile number into the form.
-     * @param mobile The mobile number to enter.
+     * Opens the date picker for date of birth.
      */
     public void enterMobile(String mobile) {
         driver.findElement(mobileInput).sendKeys(mobile);
     }
 
     /**
-     * Opens the date picker for date of birth.
+     * Selects a month in the date picker.
      */
     public void openDatePicker() {
         driver.findElement(dateOfBirthInput).click();
     }
 
     /**
-     * Selects the month in the date picker.
-     * @param month The month to select.
+     * Selects a month in the date picker.
      */
     public void selectMonth(String month) {
         Select selectMonth = new Select(driver.findElement(monthSelect));
@@ -149,16 +140,14 @@ public class PracticeFormPage {
     }
 
     /**
-     * Selects the day in the date picker.
-     * @param day The day to select.
+     * Selects a day in the date picker.
      */
     public void selectDay(String day) {
         driver.findElement(day(day)).click();
     }
 
     /**
-     * Selects the year in the date picker.
-     * @param year The year to select.
+     * Selects a year in the date picker.
      */
     public void selectYear(String year) {
         Select selectYear = new Select(driver.findElement(yearSelect));
@@ -166,8 +155,7 @@ public class PracticeFormPage {
     }
 
     /**
-     * Adds a subject to the subjects input.
-     * @param subject The subject to add.
+     * Adds a subject using autocomplete and presses ENTER.
      */
     public void addSubject(String subject) {
         WebElement input = driver.findElement(subjectsInput);
@@ -179,8 +167,6 @@ public class PracticeFormPage {
 
     /**
      * Checks if a subject is added.
-     * @param subject The subject to check.
-     * @return True if the subject is added, false otherwise.
      */
     public boolean isSubjectAdded(String subject) {
         return driver.findElement(
@@ -211,7 +197,6 @@ public class PracticeFormPage {
 
     /**
      * Checks if sports hobby is selected.
-     * @return True if selected, false otherwise.
      */
     public boolean isSportsSelected() {
         return driver.findElement(sportsCheckbox).isSelected();
@@ -219,7 +204,6 @@ public class PracticeFormPage {
 
     /**
      * Checks if reading hobby is selected.
-     * @return True if selected, false otherwise.
      */
     public boolean isReadingSelected() {
         return driver.findElement(readingCheckbox).isSelected();
@@ -227,31 +211,27 @@ public class PracticeFormPage {
 
     /**
      * Checks if music hobby is selected.
-     * @return True if selected, false otherwise.
      */
     public boolean isMusicSelected() {
         return driver.findElement(musicCheckbox).isSelected();
     }
 
     /**
-     * Uploads a picture to the form.
-     * @param filePath The path to the file to upload.
+     * Uploads a picture to the form using a file path.
      */
     public void uploadPicture(String filePath) {
         driver.findElement(uploadPictureInput).sendKeys(filePath);
     }
 
     /**
-     * Enters the current address into the form.
-     * @param address The address to enter.
+     * Fills the current address input.
      */
     public void enterCurrentAddress(String address) {
         driver.findElement(currentAddressInput).sendKeys(address);
     }
 
     /**
-     * Enters the state into the form.
-     * @param stateName The state name to enter.
+     * Fills the state input and presses ENTER (react-select).
      */
     public void enterState(String stateName) {
         WebElement state = driver.findElement(stateInput);
@@ -260,8 +240,7 @@ public class PracticeFormPage {
     }
 
     /**
-     * Enters the city into the form.
-     * @param cityName The city name to enter.
+     * Fills the city input and presses ENTER (react-select).
      */
     public void enterCity(String cityName) {
         WebElement city = driver.findElement(cityInput);
@@ -271,8 +250,7 @@ public class PracticeFormPage {
     }
 
     /**
-     * Submits the form using the provided wait.
-     * @param wait WebDriverWait instance for waiting.
+     * Submits the form safely using wait.
      */
     public void submitForm(WebDriverWait wait) {
         wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
@@ -288,74 +266,39 @@ public class PracticeFormPage {
 
     // Getters
 
-    /**
-     * Gets the value of the first name input.
-     * @return The first name value.
-     */
     public String getFirstNameValue() {
         return driver.findElement(firstNameInput).getAttribute("value");
     }
 
-    /**
-     * Gets the value of the last name input.
-     * @return The last name value.
-     */
     public String getLastNameValue() {
         return driver.findElement(lastNameInput).getAttribute("value");
     }
 
-    /**
-     * Gets the value of the email input.
-     * @return The email value.
-     */
+
     public String getEmailValue() {
         return driver.findElement(emailInput).getAttribute("value");
     }
 
-    /**
-     * Gets the value of the mobile input.
-     * @return The mobile value.
-     */
     public String getMobileValue() {
         return driver.findElement(mobileInput).getAttribute("value");
     }
 
-    /**
-     * Gets the selected date of birth.
-     * @return The selected date.
-     */
     public String getSelectedDateOfBirth() {
         return driver.findElement(dateOfBirthInput).getAttribute("value");
     }
 
-    /**
-     * Gets the uploaded picture value.
-     * @return The picture file name.
-     */
     public String getUploadedPictureValue() {
         return driver.findElement(uploadPictureInput).getAttribute("value");
     }
 
-    /**
-     * Gets the current address value.
-     * @return The address value.
-     */
     public String getCurrentAddressValue() {
         return driver.findElement(currentAddressInput).getAttribute("value");
     }
 
-    /**
-     * Gets the selected state value.
-     * @return The selected state.
-     */
     public String getSelectedStateValue() {
         return driver.findElement(selectedStateInput).getText();
     }
 
-    /**
-     * Gets the selected city value.
-     * @return The selected city.
-     */
     public String getSelectedCityValue() {
         return driver.findElement(selectedCityInput).getText();
     }
@@ -369,8 +312,6 @@ public class PracticeFormPage {
 
     /**
      * Gets the modal title after form submission.
-     * @param wait WebDriverWait instance for waiting.
-     * @return The modal title text.
      */
     public String getModalTitle(WebDriverWait wait) {
         return wait.until(
