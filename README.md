@@ -2,7 +2,8 @@
 
 This project contains **automated tests** for the [Automation Practice Form](https://demoqa.com/automation-practice-form) page.
 
-The tests are written in **Java** using **Maven**, **Selenium WebDriver**, and **JUnit 5**, following the **Page Object Model (POM)** design pattern.  
+The tests are written in **Java** using **Maven**, **Selenium WebDriver**, and **JUnit 5**, following the **Page Object Model (POM)** design pattern.
+
 The goal of the project is to verify the correctness of all form fields – from simple inputs to full form submission.
 
 ## Tech Stack
