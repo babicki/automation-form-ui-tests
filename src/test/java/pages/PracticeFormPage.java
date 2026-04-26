@@ -287,7 +287,9 @@ public class PracticeFormPage {
                 ExpectedConditions.presenceOfElementLocated(cityInput)
         );
 
-        wait.until(ExpectedConditions.visibilityOf(input));
+        driver.findElement(By.id("city")).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(cityInput));
 
         input.sendKeys(cityName);
         input.sendKeys(Keys.ENTER);
