@@ -357,7 +357,9 @@ public class PracticeFormPage {
      * Selects the first gender option.
      */
     public void selectFirstGender() {
-        wait.until(ExpectedConditions.elementToBeClickable(genderRadioLabels)).click();
+        WebElement firstGender = driver.findElements(genderRadioLabels).get(0);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", firstGender);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", firstGender);
     }
 
     /**
