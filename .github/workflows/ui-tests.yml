@@ -17,12 +17,26 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+          cache: maven
 
-      - name: Cache Maven
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: maven-${{ hashFiles('**/pom.xml') }}
+      - name: Set up Maven
+        run: mvn -v
 
       - name: Run tests (headless)
         run: mvn clean test -Dheadless=true
+        env:
+          DISPLAY: :99
+
+      - name: Upload Surefire reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
+
+      - name: Upload Allure results (if used)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
