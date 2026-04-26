@@ -1,28 +1,28 @@
-# Automation Practice Form Tests
+# Automation Form UI Tests
 
-This project contains **automated tests** for the [Automation Practice Form](https://demoqa.com/automation-practice-form) page.
+This project contains automated UI tests for a public demo application – [Automation Practice Form](https://demoqa.com/automation-practice-form).
 
-The tests are written in **Java** using **Maven**, **Selenium WebDriver**, and **JUnit 5**, following the **Page Object Model (POM)** design pattern.
+Tests are written in Java using Maven, Selenium WebDriver, and JUnit 5, and follow the Page Object Model (POM) design pattern.
 
-The goal of the project is to verify the correctness of all form fields – from simple inputs to full form submission.
+This project focuses on verifying form functionality, including field validation, UI interactions, and full form submission.
 
 ## Tech Stack
 
-- **Java** - programming language
-- **Maven** – dependency management and test execution
+- **Java** – programming language
+- **Maven** – dependency management and build tool
 - **JUnit 5** – testing framework
-- **Selenium WebDriver** – browser automation
-- **WebDriverManager** – manages Chrome driver automatically
-- **Google Chrome** – browser used for testing
+- **Selenium WebDriver** – browser automation tool
+- **WebDriverManager** – automatic driver management
+- **Google Chrome** – browser used for test execution
 
 ## Browser Configuration
 
-Tests are executed in **Google Chrome** with the following settings:
+Tests are executed in **Google Chrome** with the following configuration:
 
-- Incognito mode
+- Incognito mode enabled
 - Full-screen window
-- Implicit wait: 5 seconds
-- Chrome driver managed automatically by WebDriverManager (no manual setup required)
+- Implicit wait set to 5 seconds
+- ChromeDriver is managed automatically using WebDriverManager (no manual setup required)
 
 ## Project Structure
 ```
@@ -38,74 +38,54 @@ src
 └── resources
 └── square.png
 ```
+
+Project uses the Page Object Model (POM) to separate test logic from page interactions.
+
 ## Test Coverage
 
-The project contains tests for the following functionalities:
+The test suite covers the following functional areas of the form:
 
-1. **First Name & Last Name**
-    - Entering data
-    - Verifying the entered value
-
-2. **Email**
-    - Validating the input email
-
-3. **Gender (radio buttons)**
-    - Selecting each option
-
-4. **Mobile Phone**
-    - Verifying the entered number
-
-5. **Date of Birth**
-    - Selecting day, month, and year using the date picker
-
-6. **Subjects**
-    - Adding all available subjects
-    - Verifying each subject is added
-
-7. **Hobbies (checkboxes)**
-    - Selecting all available options
-
-8. **Upload Picture**
-    - Uploading a file from `src/test/resources`
-
-9. **Current Address**
-    - Entering multi-line text
-    - Verifying the input value
-
-10. **State & City**
-    - Selecting a state
-    - Selecting a city assigned to the selected state
-
-11. **Full Form Submission**
-    - Filling in all required fields
-    - Clicking **Submit**
-    - Verifying the confirmation message
+- Name fields validation (first name, last name)
+- Email validation
+- Gender selection (radio buttons)
+- Mobile number input validation
+- Date of birth selection using a date picker
+- Subjects handling (adding and verifying multiple values)
+- Hobbies selection (checkboxes)
+- File upload functionality
+- Current address input and validation
+- State and city selection with dependency handling
+- End-to-end form submission and confirmation message verification
 
 ## Running Tests
 
-Tests can be executed:
-- **From IDE** (e.g., IntelliJ) – run as JUnit tests
-- **From Maven**:
+Tests can be executed either from an **IDE (e.g. IntelliJ)** or using **Maven:**
+
 ```bash
 mvn test
 ```
 
-Running Allure reports locally:
+## Running Allure Reports
 
-**macOS (via Homebrew):**
+Allure reports can be generated after executing the tests.
+
+**macOS (Homebrew)**
+
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" # Install Homebrew
-brew install allure # Install Allure CLI
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install allure
 ```
+
 ```bash
-mvn test && allure serve target/allure-results # Run tests and open Allure report
+mvn test && allure serve target/allure-results
 ```
 
 **Windows (PowerShell, winget):**
+
 ```bash
-winget install --id=Qameta.Allure -e --source winget # Install Allure CLI
+winget install --id=Qameta.Allure -e --source winget
 ```
 
 ```bash
-mvn test; allure serve target/allure-results # Run tests and open Allure report
+mvn test; allure serve target/allure-results
 ```
