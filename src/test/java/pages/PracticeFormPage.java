@@ -269,20 +269,25 @@ public class PracticeFormPage {
      */
     public void enterState(String stateName) {
         WebElement input = wait.until(
-                ExpectedConditions.elementToBeClickable(stateInput)
+                ExpectedConditions.presenceOfElementLocated(stateInput)
         );
 
         input.sendKeys(stateName);
         input.sendKeys(Keys.ENTER);
+
+        wait.until(driver -> driver.findElements(cityInput).size() > 0);
     }
 
     /**
      * Fills the city input and presses ENTER (react-select).
      */
     public void enterCity(String cityName) {
+
         WebElement input = wait.until(
-                ExpectedConditions.elementToBeClickable(cityInput)
+                ExpectedConditions.presenceOfElementLocated(cityInput)
         );
+
+        wait.until(ExpectedConditions.visibilityOf(input));
 
         input.sendKeys(cityName);
         input.sendKeys(Keys.ENTER);
