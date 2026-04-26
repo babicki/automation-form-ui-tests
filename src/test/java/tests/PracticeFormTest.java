@@ -242,7 +242,7 @@ public class PracticeFormTest extends BaseTest {
 
         // Submit
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        formPage.submitForm(wait);
+        formPage.submitForm();
 
         Assertions.assertEquals("Thanks for submitting the form", formPage.getModalTitle(wait));
     }

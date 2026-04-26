@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ import java.util.List;
 public class PracticeFormPage {
 
     private final WebDriver driver;
+    private final WebDriverWait wait;
 
     // First name & last name
     private final By firstNameInput = By.id("firstName");
@@ -73,6 +75,7 @@ public class PracticeFormPage {
      */
     public PracticeFormPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     /**
@@ -128,15 +131,18 @@ public class PracticeFormPage {
      * Selects a month in the date picker.
      */
     public void openDatePicker() {
-        driver.findElement(dateOfBirthInput).click();
+        WebElement dob = wait.until(ExpectedConditions.visibilityOfElementLocated(dateOfBirthInput));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", dob);
     }
 
     /**
      * Selects a month in the date picker.
      */
     public void selectMonth(String month) {
-        Select selectMonth = new Select(driver.findElement(monthSelect));
-        selectMonth.selectByVisibleText(month);
+        WebElement el = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(monthSelect)
+        );
+        new Select(el).selectByVisibleText(month);
     }
 
     /**
@@ -150,15 +156,18 @@ public class PracticeFormPage {
      * Selects a year in the date picker.
      */
     public void selectYear(String year) {
-        Select selectYear = new Select(driver.findElement(yearSelect));
-        selectYear.selectByVisibleText(year);
+        WebElement el = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(yearSelect)
+        );
+        new Select(el).selectByVisibleText(year);
     }
 
     /**
      * Adds a subject using autocomplete and presses ENTER.
      */
     public void addSubject(String subject) {
-        WebElement input = driver.findElement(subjectsInput);
+        WebElement input = wait.until(
+                ExpectedConditions.elementToBeClickable(subjectsInput));
 
         input.sendKeys(String.valueOf(subject.charAt(0)));
         input.sendKeys(subject.substring(1));
@@ -169,30 +178,41 @@ public class PracticeFormPage {
      * Checks if a subject is added.
      */
     public boolean isSubjectAdded(String subject) {
-        return driver.findElement(
-                By.xpath("//div[contains(@class,'subjects-auto-complete__multi-value__label') and text()='" + subject + "']")
-        ).isDisplayed();
+        By subjectLocator = By.xpath(
+                "//div[contains(@class,'subjects-auto-complete__multi-value__label') and text()='" + subject + "']"
+        );
+
+        List<WebElement> elements = driver.findElements(subjectLocator);
+
+        if (elements.isEmpty()) {
+            return false;
+        } else {
+            return elements.get(0).isDisplayed();
+        }
     }
 
     /**
      * Selects the sports hobby checkbox.
      */
     public void selectSportsHobby() {
-        driver.findElement(sportsLabel).click();
+        WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(sportsLabel));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
     }
 
     /**
      * Selects the reading hobby checkbox.
      */
     public void selectReadingHobby() {
-        driver.findElement(readingLabel).click();
+        WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(readingLabel));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
     }
 
     /**
      * Selects the music hobby checkbox.
      */
     public void selectMusicHobby() {
-        driver.findElement(musicLabel).click();
+        WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(musicLabel));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
     }
 
     /**
@@ -234,26 +254,42 @@ public class PracticeFormPage {
      * Fills the state input and presses ENTER (react-select).
      */
     public void enterState(String stateName) {
-        WebElement state = driver.findElement(stateInput);
-        state.sendKeys(stateName);
-        state.sendKeys(Keys.ENTER);
+        WebElement input = wait.until(
+                ExpectedConditions.presenceOfElementLocated(stateInput)
+        );
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView(true);", input);
+
+        input.sendKeys(stateName);
+        input.sendKeys(Keys.ENTER);
     }
 
     /**
      * Fills the city input and presses ENTER (react-select).
      */
     public void enterCity(String cityName) {
-        WebElement city = driver.findElement(cityInput);
-        city.clear();
-        city.sendKeys(cityName);
-        city.sendKeys(Keys.ENTER);
+        WebElement input = wait.until(
+                ExpectedConditions.presenceOfElementLocated(cityInput)
+        );
+
+        input.sendKeys(cityName);
+        input.sendKeys(Keys.ENTER);
     }
 
     /**
      * Submits the form safely using wait.
      */
-    public void submitForm(WebDriverWait wait) {
-        wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
+    public void submitForm() {
+        WebElement submit = wait.until(
+                ExpectedConditions.presenceOfElementLocated(submitButton)
+        );
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView(true);", submit);
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", submit);
     }
 
     /**
@@ -262,6 +298,20 @@ public class PracticeFormPage {
     public void scrollToBottom() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+    }
+
+    /**
+     * Scrolls to a specific element on the page.
+     */
+    public void scrollToElement(By locator) {
+        WebElement element = wait.until(
+                ExpectedConditions.presenceOfElementLocated(locator)
+        );
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView(true);",
+                element
+        );
     }
 
     // Getters
@@ -307,7 +357,7 @@ public class PracticeFormPage {
      * Selects the first gender option.
      */
     public void selectFirstGender() {
-        driver.findElement(genderRadioLabels).click();
+        wait.until(ExpectedConditions.elementToBeClickable(genderRadioLabels)).click();
     }
 
     /**

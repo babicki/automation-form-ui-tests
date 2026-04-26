@@ -25,17 +25,28 @@ public abstract class BaseTest {
 
     /**
      * Sets up the WebDriver before all tests.
-     * Uses ChromeDriver with incognito and fullscreen mode.
+     * Uses ChromeDriver with optional headless mode.
      */
     @BeforeAll
     static void setUpDriver() {
         WebDriverManager.chromedriver().setup();
 
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
+
         ChromeOptions chromeOptions = new ChromeOptions();
+
         chromeOptions.addArguments(
                 "--incognito",
-                "--start-fullscreen"
+                "--start-maximized"
         );
+
+        if (headless) {
+            chromeOptions.addArguments(
+                    "--headless=new",
+                    "--no-sandbox",
+                    "--disable-dev-shm-usage"
+            );
+        }
 
         driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT);
@@ -43,7 +54,6 @@ public abstract class BaseTest {
 
     /**
      * Opens the practice form before each test.
-     * Initializes the PracticeFormPage object.
      */
     @BeforeEach
     void openPracticeForm() {
@@ -53,7 +63,6 @@ public abstract class BaseTest {
 
     /**
      * Closes the WebDriver after all tests.
-     * Quits the driver if it is running.
      */
     @AfterAll
     static void tearDown() {
