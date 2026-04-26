@@ -83,7 +83,8 @@ public class PracticeFormPage {
     public void open(String url) {
         driver.get(url);
 
-        // remove ads/iframes for stability
+        // Remove dynamic iframes that may interfere with test stability in this demo environment
+        // Applied due to lack of control over third-party content and unstable page structure
         ((JavascriptExecutor) driver).executeScript(
                 "document.querySelectorAll('iframe').forEach(el => el.remove());"
         );
@@ -125,17 +126,16 @@ public class PracticeFormPage {
     }
 
     /**
-     * Returns all gender labels.
+     * Selects a gender option by visible label text and provides a method to verify whether the specified gender radio button is selected.
      */
-    public List<WebElement> getGenderRadioLabels() {
-        return driver.findElements(genderRadioLabels);
+    public void selectGender(String gender) {
+        driver.findElement(By.xpath("//label[text()='" + gender + "']")).click();
     }
 
-    /**
-     * Returns all gender input elements.
-     */
-    public List<WebElement> getGenderRadioInputs() {
-        return driver.findElements(genderRadioInputs);
+    public boolean isGenderSelected(String gender) {
+        return driver.findElement(
+                By.xpath("//input[@value='" + gender + "']")
+        ).isSelected();
     }
 
     /**
@@ -149,10 +149,10 @@ public class PracticeFormPage {
      * Selects a month in the date picker.
      */
     public void openDatePicker() {
-        WebElement dob = wait.until(
+        WebElement datePicker = wait.until(
                 ExpectedConditions.elementToBeClickable(dateOfBirthInput)
         );
-        dob.click();
+        datePicker.click();
     }
 
     /**
@@ -310,22 +310,7 @@ public class PracticeFormPage {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
     }
 
-    /**
-     * Scrolls to a specific element on the page.
-     */
-    public void scrollToElement(By locator) {
-        WebElement element = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(locator)
-        );
-
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView(true);",
-                element
-        );
-    }
-
     // Getters
-
     public String getFirstNameValue() {
         return driver.findElement(firstNameInput).getAttribute("value");
     }
@@ -360,13 +345,6 @@ public class PracticeFormPage {
 
     public String getSelectedCityValue() {
         return driver.findElement(selectedCityInput).getText();
-    }
-
-    /**
-     * Selects the first gender option.
-     */
-    public void selectFirstGender() {
-        safeClick(genderRadioInputs);
     }
 
     /**

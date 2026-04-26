@@ -54,14 +54,15 @@ public class PracticeFormTest extends BaseTest {
      */
     @Story("Gender Selection")
     @Test
-    void testGenderRadioButtonSelection() {
-        List<WebElement> genderRadioLabels = formPage.getGenderRadioLabels();
-        List<WebElement> genderRadioInputs = formPage.getGenderRadioInputs();
+    void testGenderSelection() {
+        formPage.selectGender("Male");
+        Assertions.assertTrue(formPage.isGenderSelected("Male"));
 
-        for (int i = 0; i < genderRadioLabels.size(); i++) {
-            genderRadioLabels.get(i).click();
-            Assertions.assertTrue(genderRadioInputs.get(i).isSelected());
-        }
+        formPage.selectGender("Female");
+        Assertions.assertTrue(formPage.isGenderSelected("Female"));
+
+        formPage.selectGender("Other");
+        Assertions.assertTrue(formPage.isGenderSelected("Other"));
     }
 
     // ------------------------- MOBILE PHONE TEST -------------------------
@@ -209,7 +210,7 @@ public class PracticeFormTest extends BaseTest {
         formPage.enterEmail("test@example.com");
 
         // Gender
-        formPage.selectFirstGender();
+        formPage.selectGender("Male");
 
         // Mobile
         formPage.enterMobile("1234567890");
