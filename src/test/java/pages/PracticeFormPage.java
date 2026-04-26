@@ -139,10 +139,10 @@ public class PracticeFormPage {
      * Selects a month in the date picker.
      */
     public void selectMonth(String month) {
-        WebElement el = wait.until(
+        WebElement monthDropdown = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(monthSelect)
         );
-        new Select(el).selectByVisibleText(month);
+        new Select(monthDropdown).selectByVisibleText(month);
     }
 
     /**
@@ -156,10 +156,10 @@ public class PracticeFormPage {
      * Selects a year in the date picker.
      */
     public void selectYear(String year) {
-        WebElement el = wait.until(
+        WebElement yearDropdown = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(yearSelect)
         );
-        new Select(el).selectByVisibleText(year);
+        new Select(yearDropdown).selectByVisibleText(year);
     }
 
     /**
@@ -195,24 +195,24 @@ public class PracticeFormPage {
      * Selects the sports hobby checkbox.
      */
     public void selectSportsHobby() {
-        WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(sportsLabel));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
+        WebElement sportsHobbyLabel = wait.until(ExpectedConditions.presenceOfElementLocated(sportsLabel));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", sportsHobbyLabel);
     }
 
     /**
      * Selects the reading hobby checkbox.
      */
     public void selectReadingHobby() {
-        WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(readingLabel));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
+        WebElement readingHobbyLabel = wait.until(ExpectedConditions.presenceOfElementLocated(readingLabel));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", readingHobbyLabel);
     }
 
     /**
      * Selects the music hobby checkbox.
      */
     public void selectMusicHobby() {
-        WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(musicLabel));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
+        WebElement musicHobbyLabel = wait.until(ExpectedConditions.presenceOfElementLocated(musicLabel));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", musicHobbyLabel);
     }
 
     /**
