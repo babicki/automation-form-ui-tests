@@ -26,20 +26,42 @@ Tests are executed in **Google Chrome** with the following configuration:
 
 ## Project Structure
 ```
-src
-└── test
-├── java
-│ ├── base
-│ │ └── BaseTest.java
-│ ├── pages
-│ │ └── PracticeFormPage.java
-│ └── tests
-│ └── PracticeFormTest.java
-└── resources
-└── square.png
+├── .github
+│   └── workflows
+│       └── ui-tests.yml
+├── src
+│   └── test
+│       ├── java
+│       │   ├── base
+│       │   │   └── BaseTest.java
+│       │   ├── pages
+│       │   │   └── PracticeFormPage.java
+│       │   └── tests
+│       │       └── PracticeFormTest.java
+│       └── resources
+│           └── square.png
+├── pom.xml
+└── README.md
 ```
 
 Project uses the Page Object Model (POM) to separate test logic from page interactions.
+
+## CI/CD Pipeline (GitHub Actions)
+
+Project uses GitHub Actions to automatically run UI tests.
+
+Pipeline is triggered on:
+- push to repository
+- pull requests
+
+**CI Workflow includes:**
+- Maven build
+- Execution of Selenium UI tests
+- Generation of Allure results
+- Uploading test artifacts to GitHub Actions
+
+You can find the workflow in:
+`.github/workflows/ui-tests.yml`
 
 ## Test Coverage
 
@@ -71,21 +93,20 @@ Allure reports can be generated after executing the tests.
 
 **macOS (Homebrew)**
 
+If Allure is not installed:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install allure
 ```
 
-```bash
-mvn test && allure serve target/allure-results
-```
-
 **Windows (PowerShell, winget):**
 
+If Allure is not installed:
 ```bash
 winget install --id=Qameta.Allure -e --source winget
 ```
 
+Run tests and open report:
 ```bash
-mvn test; allure serve target/allure-results
+mvn test && allure serve target/allure-results
 ```
