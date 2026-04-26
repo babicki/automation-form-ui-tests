@@ -9,8 +9,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.PracticeFormPage;
 
-import java.time.Duration;
-
 /**
  * Base class for tests.
  * Sets up WebDriver and common page objects.
@@ -21,11 +19,9 @@ public abstract class BaseTest {
     protected PracticeFormPage formPage;
 
     private static final String BASE_URL = "https://demoqa.com/automation-practice-form";
-    private static final Duration IMPLICIT_WAIT = Duration.ofSeconds(5);
 
     /**
      * Sets up the WebDriver before all tests.
-     * Uses ChromeDriver with optional headless mode.
      */
     @BeforeAll
     static void setUpDriver() {
@@ -37,7 +33,12 @@ public abstract class BaseTest {
 
         chromeOptions.addArguments(
                 "--incognito",
-                "--start-maximized"
+                "--disable-gpu",
+                "--disable-extensions",
+                "--disable-popup-blocking",
+                "--disable-infobars",
+                "--window-size=1920,1080",
+                "--remote-allow-origins=*"
         );
 
         if (headless) {
@@ -49,7 +50,6 @@ public abstract class BaseTest {
         }
 
         driver = new ChromeDriver(chromeOptions);
-        driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT);
     }
 
     /**

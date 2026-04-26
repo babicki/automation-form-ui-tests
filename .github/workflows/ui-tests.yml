@@ -22,10 +22,8 @@ jobs:
       - name: Set up Maven
         run: mvn -v
 
-      - name: Run tests (headless)
+      - name: Run tests
         run: mvn clean test -Dheadless=true
-        env:
-          DISPLAY: :99
 
       - name: Upload Surefire reports
         if: always()
@@ -34,7 +32,7 @@ jobs:
           name: surefire-reports
           path: target/surefire-reports
 
-      - name: Upload Allure results (if used)
+      - name: Upload Allure results
         if: always()
         uses: actions/upload-artifact@v4
         with:

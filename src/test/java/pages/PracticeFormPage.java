@@ -69,7 +69,6 @@ public class PracticeFormPage {
     private final By submitButton = By.id("submit");
     private final By modalTitle = By.id("example-modal-sizes-title-lg");
 
-
     /**
      * Constructor for PracticeFormPage.
      */
@@ -83,6 +82,25 @@ public class PracticeFormPage {
      */
     public void open(String url) {
         driver.get(url);
+
+        // remove ads/iframes for stability
+        ((JavascriptExecutor) driver).executeScript(
+                "document.querySelectorAll('iframe').forEach(el => el.remove());"
+        );
+    }
+
+    /**
+     * Safe click with fallback for intercepted clicks.
+     */
+    private void safeClick(By locator) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+        try {
+            element.click();
+        } catch (ElementClickInterceptedException e) {
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].click();", element);
+        }
     }
 
     /**
@@ -131,8 +149,10 @@ public class PracticeFormPage {
      * Selects a month in the date picker.
      */
     public void openDatePicker() {
-        WebElement dob = wait.until(ExpectedConditions.visibilityOfElementLocated(dateOfBirthInput));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", dob);
+        WebElement dob = wait.until(
+                ExpectedConditions.elementToBeClickable(dateOfBirthInput)
+        );
+        dob.click();
     }
 
     /**
@@ -149,7 +169,7 @@ public class PracticeFormPage {
      * Selects a day in the date picker.
      */
     public void selectDay(String day) {
-        driver.findElement(day(day)).click();
+        safeClick(day(day));
     }
 
     /**
@@ -167,7 +187,8 @@ public class PracticeFormPage {
      */
     public void addSubject(String subject) {
         WebElement input = wait.until(
-                ExpectedConditions.elementToBeClickable(subjectsInput));
+                ExpectedConditions.elementToBeClickable(subjectsInput)
+        );
 
         input.sendKeys(String.valueOf(subject.charAt(0)));
         input.sendKeys(subject.substring(1));
@@ -184,35 +205,28 @@ public class PracticeFormPage {
 
         List<WebElement> elements = driver.findElements(subjectLocator);
 
-        if (elements.isEmpty()) {
-            return false;
-        } else {
-            return elements.get(0).isDisplayed();
-        }
+        return !elements.isEmpty() && elements.get(0).isDisplayed();
     }
 
     /**
      * Selects the sports hobby checkbox.
      */
     public void selectSportsHobby() {
-        WebElement sportsHobbyLabel = wait.until(ExpectedConditions.presenceOfElementLocated(sportsLabel));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", sportsHobbyLabel);
+        safeClick(sportsLabel);
     }
 
     /**
      * Selects the reading hobby checkbox.
      */
     public void selectReadingHobby() {
-        WebElement readingHobbyLabel = wait.until(ExpectedConditions.presenceOfElementLocated(readingLabel));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", readingHobbyLabel);
+        safeClick(readingLabel);
     }
 
     /**
      * Selects the music hobby checkbox.
      */
     public void selectMusicHobby() {
-        WebElement musicHobbyLabel = wait.until(ExpectedConditions.presenceOfElementLocated(musicLabel));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", musicHobbyLabel);
+        safeClick(musicLabel);
     }
 
     /**
@@ -255,11 +269,8 @@ public class PracticeFormPage {
      */
     public void enterState(String stateName) {
         WebElement input = wait.until(
-                ExpectedConditions.presenceOfElementLocated(stateInput)
+                ExpectedConditions.elementToBeClickable(stateInput)
         );
-
-        ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView(true);", input);
 
         input.sendKeys(stateName);
         input.sendKeys(Keys.ENTER);
@@ -270,7 +281,7 @@ public class PracticeFormPage {
      */
     public void enterCity(String cityName) {
         WebElement input = wait.until(
-                ExpectedConditions.presenceOfElementLocated(cityInput)
+                ExpectedConditions.elementToBeClickable(cityInput)
         );
 
         input.sendKeys(cityName);
@@ -281,15 +292,7 @@ public class PracticeFormPage {
      * Submits the form safely using wait.
      */
     public void submitForm() {
-        WebElement submit = wait.until(
-                ExpectedConditions.presenceOfElementLocated(submitButton)
-        );
-
-        ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView(true);", submit);
-
-        ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].click();", submit);
+        safeClick(submitButton);
     }
 
     /**
@@ -305,7 +308,7 @@ public class PracticeFormPage {
      */
     public void scrollToElement(By locator) {
         WebElement element = wait.until(
-                ExpectedConditions.presenceOfElementLocated(locator)
+                ExpectedConditions.visibilityOfElementLocated(locator)
         );
 
         ((JavascriptExecutor) driver).executeScript(
@@ -323,7 +326,6 @@ public class PracticeFormPage {
     public String getLastNameValue() {
         return driver.findElement(lastNameInput).getAttribute("value");
     }
-
 
     public String getEmailValue() {
         return driver.findElement(emailInput).getAttribute("value");
@@ -357,15 +359,7 @@ public class PracticeFormPage {
      * Selects the first gender option.
      */
     public void selectFirstGender() {
-        WebElement firstGender = wait.until(ExpectedConditions.presenceOfElementLocated(genderRadioLabels));
-
-        List<WebElement> iframes = driver.findElements(By.cssSelector("iframe[src*='safeframe']"));
-        if (!iframes.isEmpty()) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].style.display='none';", iframes.get(0));
-        }
-
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", firstGender);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", firstGender);
+        safeClick(genderRadioInputs);
     }
 
     /**
