@@ -2,7 +2,15 @@ name: UI Tests
 
 on:
   push:
+    paths:
+      - 'src/**'
+      - 'pom.xml'
+      - '.github/workflows/**'
   pull_request:
+    paths:
+      - 'src/**'
+      - 'pom.xml'
+      - '.github/workflows/**'
 
 jobs:
   test:
