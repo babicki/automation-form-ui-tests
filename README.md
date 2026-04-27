@@ -2,7 +2,7 @@
 
 This project contains automated UI tests for a public demo application – [Automation Practice Form](https://demoqa.com/automation-practice-form).
 
-Tests are written in Java using Maven, Selenium WebDriver, and JUnit 5, and follow the Page Object Model (POM) design pattern.
+Tests are written in **Java** using **Maven**, **Selenium WebDriver**, and **JUnit 5**, and follow the **Page Object Model (POM)** design pattern.
 
 This project focuses on verifying form functionality, including field validation, UI interactions, and full form submission.
 
@@ -21,7 +21,7 @@ Tests are executed in **Google Chrome** with the following configuration:
 
 - Incognito mode enabled
 - Full-screen window
-- Implicit wait set to 5 seconds
+- Explicit waits used (WebDriverWait) for synchronization
 - ChromeDriver is managed automatically using WebDriverManager (no manual setup required)
 
 ## Project Structure
@@ -44,23 +44,23 @@ Tests are executed in **Google Chrome** with the following configuration:
 └── README.md
 ```
 
-Project uses the Page Object Model (POM) to separate test logic from page interactions.
+The project uses the **Page Object Model (POM)** to separate test logic from page interactions.
 
 ## CI/CD Pipeline (GitHub Actions)
 
-Project uses GitHub Actions to automatically run UI tests.
+This project uses **GitHub Actions** to automatically run UI tests.
 
-Pipeline is triggered on:
+The pipeline is triggered on:
 - push to repository
 - pull requests
 
-**CI Workflow includes:**
+**CI workflow includes:**
 - Maven build
 - Execution of Selenium UI tests
 - Generation of Allure results
 - Uploading test artifacts to GitHub Actions
 
-You can find the workflow in:
+The workflow is located in:
 `.github/workflows/ui-tests.yml`
 
 ## Test Coverage
@@ -87,26 +87,17 @@ Tests can be executed either from an **IDE (e.g. IntelliJ)** or using **Maven:**
 mvn test
 ```
 
-## Running Allure Reports
+## Allure Reports
 
-Allure reports can be generated after executing the tests.
+Reports can be accessed in two ways:
 
-**macOS (Homebrew)**
+**1. CI (recommended)**
 
-If Allure is not installed:
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install allure
-```
+Report is automatically generated and published via GitHub Pages: https://babicki.github.io/automation-form-ui-tests
 
-**Windows (PowerShell, winget):**
+**2. Local execution (optional)**
 
-If Allure is not installed:
-```bash
-winget install --id=Qameta.Allure -e --source winget
-```
-
-Run tests and open report:
+If needed for debugging:
 ```bash
 mvn test && allure serve target/allure-results
 ```
